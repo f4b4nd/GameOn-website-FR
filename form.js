@@ -23,7 +23,7 @@ const inputsToCheck = [
 ]
 
 // check input with regex: nom, prenom, mail, nombre de tournois
-const itemsWithRegex = [
+const inputsWithRegex = [
     { 
         name: 'firstname', 
         input: firstNameInput, 
@@ -47,27 +47,24 @@ const itemsWithRegex = [
 ]
 
 // check form when input is checked with regex
-function checkFormInputsWithRegex(input, regex) {
-    if (input.value.match(regex)) {
-        return true ;
-    } 
-    return false ;
+function InputsWithRegexAreValid(input, regex) {
+    return input.value.match(regex) ? true : false ;
 }
 
 /// check if there is 1 location selected
-function checkFormLocationInput() {
+function LocationInputIsValid() {
     const inputs = [...locationInputs] ;
     const checkedInputs = inputs.filter(item => item.checked) ;
     return checkedInputs.length === 1 ;
 }
 
 // check if General Conditions is checked
-function checkFormGeneralConditionsInput() {
+function GeneralConditionsInputIsValid() {
     return generalConditionsInput.checked ;
 }
 
 // check if Birthdate is not empty
-function checkFormBirthdateInput() {
+function BirthdateInputIsValid() {
     return birthDateInput.value !== '' ;
 }
 
@@ -80,26 +77,26 @@ submitModalBtn.addEventListener('click', function(e) {
     const errors = []
 
     // add errors with regex inputs
-    itemsWithRegex.map(item => {
-        if (checkFormInputsWithRegex(item.input, item.regex) === false)  errors.push(item.input.id) ;
+    inputsWithRegex.map(item => {
+        if (!InputsWithRegexAreValid(item.input, item.regex))  errors.push(item.input.id) ;
     });
 
     // add error for location
-    if (!checkFormLocationInput())  errors.push('location') ;
+    if (!LocationInputIsValid())  errors.push('location') ;
 
     // add error for generalConditions
-    if (!checkFormGeneralConditionsInput())  errors.push('generalConditions') ;
+    if (!GeneralConditionsInputIsValid())  errors.push('generalConditions') ;
 
     // add error for birthdate
-    if (!checkFormBirthdateInput())  errors.push('birthdate') ;
+    if (!BirthdateInputIsValid())  errors.push('birthdate') ;
 
     // display errors
     if (errors.length > 0) {
 
         inputsToCheck.map(input => {
 
-            const errorElement = document.querySelector('#' + input.errorID)
             const element = document.querySelector('#' + input.id)
+            const errorElement = document.querySelector('#' + input.errorID)
 
             if (errors.includes(input.id)) {
                 errorElement.style.display = 'block' ;
