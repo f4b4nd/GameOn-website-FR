@@ -108,7 +108,9 @@ submitModalBtn.addEventListener('click', function(e) {
     }
 
     else {
-        console.log('form is valid') ;
+        closeModal('#form-modal') ;
+        launchModal('#success-modal') ;
+        e.preventDefault() ;
     }
 
 })

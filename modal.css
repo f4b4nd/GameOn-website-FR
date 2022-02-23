@@ -539,7 +539,7 @@ footer {
 }
 
 #success-modal {
-  display: block;
+  display: none;
 }
 
 #success-modal .content {
@@ -550,7 +550,7 @@ footer {
   position: relative;
 }
 
-#success-modal .modal-body{
+#success-modal .modal-body {
   position: absolute;
   top: 40%;
 }
