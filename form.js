@@ -107,6 +107,7 @@ submitModalBtn.addEventListener('click', function(e) {
             }
             else {
                 errorElement.style.display = 'none' ;
+                if (input.border) element.style.border = 'none' ;
             }
 
         });
