@@ -32,3 +32,9 @@ function closeModal(idSelector) {
 // close modal event
 closeModalBtn.addEventListener('click', () => closeModal('#form-modal')) ;
 closeSuccessModalBtn.forEach(btn => btn.addEventListener('click', () => closeModal('#success-modal'))) ;
+
+// reset form
+function resetForm () {
+    const form = document.querySelector('#form-modal form') ;
+    form.reset() ;
+}

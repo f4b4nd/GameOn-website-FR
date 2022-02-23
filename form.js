@@ -75,6 +75,8 @@ function checkFormBirthdateInput() {
 // check all datas from form
 submitModalBtn.addEventListener('click', function(e) {
 
+    e.preventDefault() ;
+
     const errors = []
 
     // add errors with regex inputs
@@ -93,8 +95,6 @@ submitModalBtn.addEventListener('click', function(e) {
 
     // display errors
     if (errors.length > 0) {
-
-        e.preventDefault() ;
 
         inputsToCheck.map(input => {
 
@@ -116,8 +116,8 @@ submitModalBtn.addEventListener('click', function(e) {
 
     else {
         closeModal('#form-modal') ;
-        e.preventDefault() ;
         launchModal('#success-modal') ;
+        resetForm() ;
     }
 
 })
