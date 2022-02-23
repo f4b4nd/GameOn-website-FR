@@ -5,18 +5,17 @@ const submitModalBtn = modalbg.querySelector('[type="submit"]') ;
 const firstNameInput = document.querySelector('#first') ;
 const lastNameInput = document.querySelector('#last') ;
 const emailInput = document.querySelector('#email') ;
-const birthDateInput = document.querySelector('#birthdate') ;
+const birthdateInput = document.querySelector('#birthdate') ;
 const numberOfTournamentsInput = document.querySelector('#quantity') ;
 const locationInputs = document.querySelectorAll('#location input') ;
 const generalConditionsInput = document.querySelector('#generalConditions') ;
-const subscribeToAlertsInput = document.querySelector('#subscribeToAlerts') ;
 
 // inputs with error selector association
 const inputsToCheck = [
     { input: firstNameInput, id: 'first', errorID: 'firstname-error', border: true },
     { input: lastNameInput, id: 'last', errorID: 'lastname-error', border: true },
     { input: emailInput, id: 'email', errorID: 'email-error', border: true },
-    { input: birthDateInput, id: 'birthdate', errorID: 'birthdate-error', border: true },
+    { input: birthdateInput, id: 'birthdate', errorID: 'birthdate-error', border: true },
     { input: numberOfTournamentsInput, id: 'quantity', errorID: 'quantity-error', border: true },
     { input: locationInputs, id: 'location', errorID: 'location-error', border: false},
     { input: generalConditionsInput, id: 'generalConditions', errorID: 'generalConditions-error', border: false },
@@ -65,7 +64,7 @@ function generalConditionsInputIsValid() {
 
 // check if Birthdate is not empty
 function birthdateInputIsValid() {
-    return birthDateInput.value !== '' ;
+    return birthdateInput.value !== '' ;
 }
 
 

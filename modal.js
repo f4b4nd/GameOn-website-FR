@@ -37,17 +37,15 @@ closeSuccessModalBtn.forEach(btn => btn.addEventListener('click', () => closeMod
 function resetForm () {
     const form = document.querySelector('#form-modal form') ;
     form.reset() ;
-    resetFormStyle() ;
+    resetFormErrorsStyle() ;
 }
 
 // reset form style
-const resetFormStyle = () => {
+const resetFormErrorsStyle = () => {
 
     // reset borders
     const inputs = document.querySelectorAll('#form-modal form input') ;
-    Array.from(inputs).map(e => {
-        e.style.border = 'none' ;
-    })
+    Array.from(inputs).map(e => e.style.border = 'none') ;
 
     // hide errors
     const errors = document.querySelectorAll('.error') ;
