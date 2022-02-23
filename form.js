@@ -47,24 +47,24 @@ const inputsWithRegex = [
 ]
 
 // check form when input is checked with regex
-function InputsWithRegexAreValid(input, regex) {
+function inputsWithRegexAreValid(input, regex) {
     return input.value.match(regex) ? true : false ;
 }
 
 /// check if there is 1 location selected
-function LocationInputIsValid() {
+function locationInputIsValid() {
     const inputs = [...locationInputs] ;
     const checkedInputs = inputs.filter(item => item.checked) ;
     return checkedInputs.length === 1 ;
 }
 
 // check if General Conditions is checked
-function GeneralConditionsInputIsValid() {
+function generalConditionsInputIsValid() {
     return generalConditionsInput.checked ;
 }
 
 // check if Birthdate is not empty
-function BirthdateInputIsValid() {
+function birthdateInputIsValid() {
     return birthDateInput.value !== '' ;
 }
 
@@ -78,17 +78,17 @@ submitModalBtn.addEventListener('click', function(e) {
 
     // add errors with regex inputs
     inputsWithRegex.map(item => {
-        if (!InputsWithRegexAreValid(item.input, item.regex))  errors.push(item.input.id) ;
+        if (!inputsWithRegexAreValid(item.input, item.regex))  errors.push(item.input.id) ;
     });
 
     // add error for location
-    if (!LocationInputIsValid())  errors.push('location') ;
+    if (!locationInputIsValid())  errors.push('location') ;
 
     // add error for generalConditions
-    if (!GeneralConditionsInputIsValid())  errors.push('generalConditions') ;
+    if (!generalConditionsInputIsValid())  errors.push('generalConditions') ;
 
     // add error for birthdate
-    if (!BirthdateInputIsValid())  errors.push('birthdate') ;
+    if (!birthdateInputIsValid())  errors.push('birthdate') ;
 
     // display errors
     if (errors.length > 0) {
