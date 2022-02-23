@@ -74,8 +74,8 @@ submitModalBtn.addEventListener('click', function(e) {
 
     e.preventDefault() ;
 
-    const errors = []
-
+    const errors = [] ;
+    
     // add errors with regex inputs
     inputsWithRegex.map(item => {
         if (!inputsWithRegexAreValid(item.input, item.regex))  errors.push(item.input.id) ;
