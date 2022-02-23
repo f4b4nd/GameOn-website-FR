@@ -527,3 +527,10 @@ footer {
   }
 }
 
+.error {
+  color: red;
+  font-size: 0.6em;
+  margin-top: 0.4em;
+  margin-bottom: 1em;
+  display: none;
+}

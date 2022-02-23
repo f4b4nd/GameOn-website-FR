@@ -14,7 +14,7 @@ const formData = document.querySelectorAll(".formData");
 const closeModalBtn = modalbg.querySelector(".close");
 const submitModalBtn = modalbg.querySelector('[type="submit"]');
 
-// FORM Datta
+// DOM : form data
 const firstNameInput = document.querySelector('#first');
 const lastNameInput = document.querySelector('#last');
 const emailInput = document.querySelector('#email');
@@ -47,36 +47,16 @@ const regexEmail = /^[\w-\.]+@[A-Za-z]+\.[A-Za-z]+$/gm ;
 const regexNumberOfTournaments = /^\d+$/gm
 
 const regexItems = {
-    firstname : { selector: firstNameInput, regex: regexName },
-    lastname : { selector: lastNameInput, regex: regexName },
-    email : { selector: emailInput, regex: regexEmail },
-    numberOfTournaments : { selector: numberOfTournamentsInput, regex: regexNumberOfTournaments },
+    firstname : { input: firstNameInput, regex: regexName },
+    lastname : { input: lastNameInput, regex: regexName },
+    email : { input: emailInput, regex: regexEmail },
+    numberOfTournaments : { input: numberOfTournamentsInput, regex: regexNumberOfTournaments },
 }
 
-firstNameInput.addEventListener('change', function () {
-    checkFormDataWithRegex(this, regexName)
-});
-
-lastNameInput.addEventListener('change', function () {
-    checkFormDataWithRegex(this, regexName)
-});
-
-emailInput.addEventListener('change', function () {
-    checkFormDataWithRegex(this, regexEmail)
-});
-
-numberOfTournamentsInput.addEventListener('change', function () {
-    checkFormDataWithRegex(this, regexNumberOfTournaments)
-});
-
-function checkFormDataWithRegex(formData, regex) {
-    const label = formData.name
-    const value = formData.value
-    if (value.match(regex)) {
-        //console.log(value, 'is valid for', label)
+function checkFormInputWithRegex(formInput, regex) {
+    if (formInput.value.match(regex)) {
         return true
     } 
-    //console.log(value, 'is not a valid value for', label)
     return false
 }
 
@@ -93,26 +73,37 @@ function checkGeneralConditions() {
     return generalConditions.checked
 }
 
+const errorsSelectors = [
+    { id: 'first', errorID: 'firstname-error' },
+    { id: 'email', errorID: 'email-error' },
+]
+
 // check all datas from form
 submitModalBtn.addEventListener('click', function(e) {
-    e.preventDefault();
 
+    const errors = []
+    console.log('errors', errors)
     // inputs with regex
-    const inputsWithRegex = Object.values(regexItems) ;
-    const checkedInputsWithRegex = inputsWithRegex.filter(item => checkFormDataWithRegex(item.selector, item.regex)) ;
+    const itemsWithRegex = Object.values(regexItems) ;
+    itemsWithRegex.map(item => {
+        if (checkFormInputWithRegex(item.input, item.regex) === false)  errors.push(item.input)
+    });
 
-    const regexInputsAreValid = checkedInputsWithRegex.length === inputsWithRegex.length ;
     const locationIsValid = checkFormDataLocation() ? true : false ;
-    const generalConditionIsValid = checkGeneralConditions()
+    const generalConditionIsValid = checkGeneralConditions() ;
 
-    if (regexInputsAreValid && locationIsValid && generalConditionIsValid) {
-        console.log('All are valid', regexInputsAreValid, locationIsValid, generalConditionIsValid)
+    if (errors.length > 0) {
+        e.preventDefault();
+        errors.map(error => {
+            const matchID = errorsSelectors.find(errorSelector => error.id === errorSelector.id)
+            if (matchID)    document.querySelector('#' + matchID.errorID).style.display = 'block'
+        });
     }
     else {
-        console.log('Something is missing', regexInputsAreValid, locationIsValid, generalConditionIsValid)
+        document.querySelector('.error').style.display = 'none' ;
+        console.log('All are valid') ;
     }
 })
 
 // redirect when clicked
 
-// close modal

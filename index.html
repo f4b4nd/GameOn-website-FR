@@ -72,6 +72,7 @@
                   name="first"
                   minlength="2"
                 /><br>
+                <span id="firstname-error" class="error"> Veuillez entrer 2 caractères ou plus pour le champ du prénom. </span> 
               </div>
               <div
                 class="formData">
@@ -82,6 +83,7 @@
                   id="last"
                   name="last"
                 /><br>
+                <span id="lastname-error" class="error"> Veuillez entrer 2 caractères ou plus pour le champ du nom. </span> 
               </div>
               <div
                 class="formData">
@@ -92,6 +94,7 @@
                   id="email"
                   name="email"
                 /><br>
+                <span id="email-error" class="error"> Veuillez entrer un email valide. </span> 
               </div>
               <div
                 class="formData">
@@ -102,6 +105,7 @@
                   id="birthdate"
                   name="birthdate"
                 /><br>
+                <span id="birthdate-error" class="error"> Veuillez entrer votre date de naissance. </span>
               </div>
               <div
                 class="formData">
@@ -176,7 +180,8 @@
                 <label class="checkbox-label" for="location6">
                   <span class="checkbox-icon"></span>
                   Portland</label
-                >
+                ><br>
+                <span id="location-error" class="error"> Vous devez choisir une option. </span>
               </div>
 
               <div
@@ -191,11 +196,12 @@
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
-                <br>
+                <span id="generalConditions-error" class="error"> Vous devez vérifier que vous acceptez les termes et conditions. </span>
+
                 <input class="checkbox-input" type="checkbox" id="subscribeToAlerts" />
                 <label class="checkbox2-label" for="subscribeToAlerts">
                   <span class="checkbox-icon"></span>
-                  Je Je souhaite être prévenu des prochains évènements.
+                  Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
               </div>
