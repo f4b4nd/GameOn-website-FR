@@ -12,14 +12,14 @@ const generalConditionsInput = document.querySelector('#generalConditions') ;
 const subscribeToAlertsInput = document.querySelector('#subscribeToAlerts') ;
 
 // inputs with error selector association
-const inputs = [
-    { input: firstNameInput, id: 'first', errorID: 'firstname-error' },
-    { input: lastNameInput, id: 'last', errorID: 'lastname-error' },
-    { input: emailInput, id: 'email', errorID: 'email-error' },
-    { input: birthDateInput, id: 'birthdate', errorID: 'birthdate-error' },
-    { input: numberOfTournamentsInput, id: 'quantity', errorID: 'quantity-error' },
-    { input: locationInputs, id: 'location', errorID: 'location-error' },
-    { input: generalConditionsInput, id: 'generalConditions', errorID: 'generalConditions-error' },
+const inputsToCheck = [
+    { input: firstNameInput, id: 'first', errorID: 'firstname-error', border: true },
+    { input: lastNameInput, id: 'last', errorID: 'lastname-error', border: true },
+    { input: emailInput, id: 'email', errorID: 'email-error', border: true },
+    { input: birthDateInput, id: 'birthdate', errorID: 'birthdate-error', border: true },
+    { input: numberOfTournamentsInput, id: 'quantity', errorID: 'quantity-error', border: true },
+    { input: locationInputs, id: 'location', errorID: 'location-error', border: false},
+    { input: generalConditionsInput, id: 'generalConditions', errorID: 'generalConditions-error', border: false },
 ]
 
 // check input with regex: nom, prenom, mail, nombre de tournois
@@ -96,21 +96,27 @@ submitModalBtn.addEventListener('click', function(e) {
 
         e.preventDefault() ;
 
-        inputs.map(input => {
+        inputsToCheck.map(input => {
+
+            const errorElement = document.querySelector('#' + input.errorID)
+            const element = document.querySelector('#' + input.id)
+
             if (errors.includes(input.id)) {
-                document.querySelector('#' + input.errorID).style.display = 'block' ;
+                errorElement.style.display = 'block' ;
+                if (input.border) element.style.border = '1px solid red' ;
             }
             else {
-                document.querySelector('#' + input.errorID).style.display = 'none' ;
+                errorElement.style.display = 'none' ;
             }
+
         });
 
     }
 
     else {
         closeModal('#form-modal') ;
-        launchModal('#success-modal') ;
         e.preventDefault() ;
+        launchModal('#success-modal') ;
     }
 
 })
