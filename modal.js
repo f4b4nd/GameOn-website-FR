@@ -17,6 +17,7 @@ const lastNameInput = document.querySelector('#last');
 const emailInput = document.querySelector('#email');
 const birthDateInput = document.querySelector('#birthdate');
 const numberOfTournamentsInput = document.querySelector('#quantity');
+const locationFormData = document.querySelectorAll('#location input');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -40,7 +41,6 @@ const regexName = /^[A-Za-z]{2,}$/gm ;
 const regexEmail = /^[A-Za-z]+@[A-Za-z]+\.[A-Za-z]+$/gm ;
 const regexNumberOfTournaments = /^\d+$/gm
 
-
 firstNameInput.addEventListener('change', function () {
     checkFormDataWithRegex(this, regexName)
 });
@@ -58,7 +58,6 @@ numberOfTournamentsInput.addEventListener('change', function () {
 });
 
 function checkFormDataWithRegex(formData, regex) {
-    console.log(formData, regex)
     const label = formData.name
     const value = formData.value
     if (value.match(regex)) {
@@ -68,7 +67,14 @@ function checkFormDataWithRegex(formData, regex) {
     }
 }
 
-//lastNameInput.addEventListener('change', checkFormWithRegex(regexName));
+
+/// check if there 1 location is selected
+function checkFormDataLocation() {
+    const listData = [...locationFormData] ;
+    var checkedItems = listData.filter(item => item.checked) ;
+    return checkedItems.length === 1 ? checkedItems[0] : false ;
+}
+
 
 // get values from input
 
