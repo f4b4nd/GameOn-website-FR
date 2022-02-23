@@ -20,9 +20,9 @@ const lastNameInput = document.querySelector('#last');
 const emailInput = document.querySelector('#email');
 const birthDateInput = document.querySelector('#birthdate');
 const numberOfTournamentsInput = document.querySelector('#quantity');
-const locationFormData = document.querySelectorAll('#location input');
-const generalConditions = document.querySelector('#generalConditions');
-const subscribeToAlerts = document.querySelector('#subscribeToAlerts');
+const locationInputs = document.querySelectorAll('#location input');
+const generalConditionsInput = document.querySelector('#generalConditions');
+const subscribeToAlertsInput = document.querySelector('#subscribeToAlerts');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -53,57 +53,80 @@ const regexItems = {
     numberOfTournaments : { input: numberOfTournamentsInput, regex: regexNumberOfTournaments },
 }
 
-function checkFormInputWithRegex(formInput, regex) {
+function checkFormInputsWithRegex(formInput, regex) {
     if (formInput.value.match(regex)) {
         return true
     } 
     return false
 }
 
-
 /// check if there is 1 location selected
-function checkFormDataLocation() {
-    const listData = [...locationFormData] ;
-    const checkedItems = listData.filter(item => item.checked) ;
-    return checkedItems.length === 1 ? checkedItems[0] : false ;
+function checkFormLocationInput() {
+    const inputs = [...locationInputs] ;
+    const checkedInputs = inputs.filter(item => item.checked) ;
+    return checkedInputs.length === 1 ;
 }
 
 // check if General Conditions is checked
-function checkGeneralConditions() {
-    return generalConditions.checked
+function checkFormGeneralConditionsInput() {
+    return generalConditionsInput.checked
 }
 
-const errorsSelectors = [
-    { id: 'first', errorID: 'firstname-error' },
-    { id: 'email', errorID: 'email-error' },
-]
+// check if Birthdate is not empty
+function checkFormBirthdateInput() {
+    return birthDateInput.value !== ''
+}
+
 
 // check all datas from form
 submitModalBtn.addEventListener('click', function(e) {
 
     const errors = []
-    console.log('errors', errors)
-    // inputs with regex
+
+    const inputs = [
+        { input: firstNameInput, id: 'first', errorID: 'firstname-error' },
+        { input: lastNameInput, id: 'last', errorID: 'lastname-error' },
+        { input: emailInput, id: 'email', errorID: 'email-error' },
+        { input: birthDateInput, id: 'birthdate', errorID: 'birthdate-error' },
+        { input: numberOfTournamentsInput, id: 'quantity', errorID: 'quantity-error' },
+        { input: locationInputs, id: 'location', errorID: 'location-error' },
+        { input: generalConditionsInput, id: 'generalConditions', errorID: 'generalConditions-error' },
+    ]
+
+    // add errors with regex inputs
     const itemsWithRegex = Object.values(regexItems) ;
     itemsWithRegex.map(item => {
-        if (checkFormInputWithRegex(item.input, item.regex) === false)  errors.push(item.input)
+        if (checkFormInputsWithRegex(item.input, item.regex) === false)  errors.push(item.input.id)
     });
 
-    const locationIsValid = checkFormDataLocation() ? true : false ;
-    const generalConditionIsValid = checkGeneralConditions() ;
+    // add error for location
+    if (!checkFormLocationInput())  errors.push('location');
+
+    // add error for generalConditions
+    if (!checkFormGeneralConditionsInput())  errors.push('generalConditions');
+
+    // add error for birthdate
+    if (!checkFormBirthdateInput())  errors.push('birthdate');
 
     if (errors.length > 0) {
+
         e.preventDefault();
-        errors.map(error => {
-            const matchID = errorsSelectors.find(errorSelector => error.id === errorSelector.id)
-            if (matchID)    document.querySelector('#' + matchID.errorID).style.display = 'block'
+
+        inputs.map(input => {
+            if (errors.includes(input.id)) {
+                document.querySelector('#' + input.errorID).style.display = 'block' ;
+            }
+            else {
+                document.querySelector('#' + input.errorID).style.display = 'none' ;
+            }
         });
+
     }
+
     else {
-        document.querySelector('.error').style.display = 'none' ;
-        console.log('All are valid') ;
+        console.log('form is valid')
     }
+
 })
 
-// redirect when clicked
 
