@@ -12,12 +12,17 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeModalBtn = modalbg.querySelector(".close");
+const submitModalBtn = modalbg.querySelector('[type="submit"]');
+
+// FORM Datta
 const firstNameInput = document.querySelector('#first');
 const lastNameInput = document.querySelector('#last');
 const emailInput = document.querySelector('#email');
 const birthDateInput = document.querySelector('#birthdate');
 const numberOfTournamentsInput = document.querySelector('#quantity');
 const locationFormData = document.querySelectorAll('#location input');
+const generalConditions = document.querySelector('#generalConditions');
+const subscribeToAlerts = document.querySelector('#subscribeToAlerts');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -41,6 +46,13 @@ const regexName = /^[A-Za-z]{2,}$/gm ;
 const regexEmail = /^[A-Za-z]+@[A-Za-z]+\.[A-Za-z]+$/gm ;
 const regexNumberOfTournaments = /^\d+$/gm
 
+const regexItems = {
+    firstname : { selector: firstNameInput, regex: regexName },
+    lastname : { selector: lastNameInput, regex: regexName },
+    email : { selector: emailInput, regex: regexEmail },
+    numberOfTournaments : { selector: numberOfTournamentsInput, regex: regexNumberOfTournaments },
+}
+
 firstNameInput.addEventListener('change', function () {
     checkFormDataWithRegex(this, regexName)
 });
@@ -61,22 +73,38 @@ function checkFormDataWithRegex(formData, regex) {
     const label = formData.name
     const value = formData.value
     if (value.match(regex)) {
-        console.log(value, 'is valid for', label)
-    } else {
-        console.log(value, 'is not a valid value for', label)
-    }
+        //console.log(value, 'is valid for', label)
+        return true
+    } 
+    //console.log(value, 'is not a valid value for', label)
+    return false
 }
 
 
-/// check if there 1 location is selected
+/// check if there is 1 location selected
 function checkFormDataLocation() {
     const listData = [...locationFormData] ;
-    var checkedItems = listData.filter(item => item.checked) ;
+    const checkedItems = listData.filter(item => item.checked) ;
     return checkedItems.length === 1 ? checkedItems[0] : false ;
 }
 
+// check if General Conditions is checked
+function checkGeneralConditons() {
+    return generalConditions.checked
+}
 
-// get values from input
+// check all datas from form
+submitModalBtn.addEventListener('click', function(e){
+    e.preventDefault();
+
+    // inputs with regex
+    const inputsWithRegex = Object.values(regexItems)
+    const checkedInputsWithRegex = inputsWithRegex.filter(item => checkFormDataWithRegex(item.selector, item.regex))
+    const regexInputsAreValid = checkedInputsWithRegex.length === inputsWithRegex.length
+    console.log(regexInputsAreValid)
+
+
+})
 
 // redirect when clicked
 
