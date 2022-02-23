@@ -43,7 +43,7 @@ closeModalBtn.addEventListener('click', closeModal);
 
 // check input with regex: nom, prenom, mail, nombre de tournois
 const regexName = /^[A-Za-z]{2,}$/gm ;
-const regexEmail = /^[A-Za-z]+@[A-Za-z]+\.[A-Za-z]+$/gm ;
+const regexEmail = /^[\w-\.]+@[A-Za-z]+\.[A-Za-z]+$/gm ;
 const regexNumberOfTournaments = /^\d+$/gm
 
 const regexItems = {
@@ -89,21 +89,28 @@ function checkFormDataLocation() {
 }
 
 // check if General Conditions is checked
-function checkGeneralConditons() {
+function checkGeneralConditions() {
     return generalConditions.checked
 }
 
 // check all datas from form
-submitModalBtn.addEventListener('click', function(e){
+submitModalBtn.addEventListener('click', function(e) {
     e.preventDefault();
 
     // inputs with regex
-    const inputsWithRegex = Object.values(regexItems)
-    const checkedInputsWithRegex = inputsWithRegex.filter(item => checkFormDataWithRegex(item.selector, item.regex))
-    const regexInputsAreValid = checkedInputsWithRegex.length === inputsWithRegex.length
-    console.log(regexInputsAreValid)
+    const inputsWithRegex = Object.values(regexItems) ;
+    const checkedInputsWithRegex = inputsWithRegex.filter(item => checkFormDataWithRegex(item.selector, item.regex)) ;
 
+    const regexInputsAreValid = checkedInputsWithRegex.length === inputsWithRegex.length ;
+    const locationIsValid = checkFormDataLocation() ? true : false ;
+    const generalConditionIsValid = checkGeneralConditions()
 
+    if (regexInputsAreValid && locationIsValid && generalConditionIsValid) {
+        console.log('All are valid', regexInputsAreValid, locationIsValid, generalConditionIsValid)
+    }
+    else {
+        console.log('Something is missing', regexInputsAreValid, locationIsValid, generalConditionIsValid)
+    }
 })
 
 // redirect when clicked
