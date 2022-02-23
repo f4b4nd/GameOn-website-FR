@@ -1,4 +1,7 @@
-// DOM : form data
+// DOM elements
+const submitModalBtn = modalbg.querySelector('[type="submit"]') ;
+
+// DOM : form inputs
 const firstNameInput = document.querySelector('#first') ;
 const lastNameInput = document.querySelector('#last') ;
 const emailInput = document.querySelector('#email') ;
@@ -8,6 +11,7 @@ const locationInputs = document.querySelectorAll('#location input') ;
 const generalConditionsInput = document.querySelector('#generalConditions') ;
 const subscribeToAlertsInput = document.querySelector('#subscribeToAlerts') ;
 
+// inputs with error selector association
 const inputs = [
     { input: firstNameInput, id: 'first', errorID: 'firstname-error' },
     { input: lastNameInput, id: 'last', errorID: 'lastname-error' },
@@ -26,7 +30,7 @@ const itemsWithRegex = [
         regex: /^[A-Za-z]{2,}$/gm 
     },
     { 
-        name: 'lasttname', 
+        name: 'lastname', 
         input: lastNameInput, 
         regex: /^[A-Za-z]{2,}$/gm 
     },
@@ -108,5 +112,3 @@ submitModalBtn.addEventListener('click', function(e) {
     }
 
 })
-
-

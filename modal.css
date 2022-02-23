@@ -158,7 +158,6 @@ main {
 }
 
 .bground {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -533,4 +532,30 @@ footer {
   margin-top: 0.4em;
   margin-bottom: 1em;
   display: none;
+}
+
+#form-modal {
+  display: none;
+}
+
+#success-modal {
+  display: block;
+}
+
+#success-modal .content {
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+#success-modal .modal-body{
+  position: absolute;
+  top: 40%;
+}
+
+#success-modal .button {
+  margin-top: auto;
+  margin-bottom: 1.5em;
 }
