@@ -1,5 +1,8 @@
-# Projet GameOn
-1. Forkez ce repo ;
-2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ;
-3. Il n'y a aucune dépendance ;
-4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
+# Projet 4 : Créez ue landing page avec Javascript
+
+
+## Lien du site 
+Le projet est mis en ligne à l'URL suivante : 
+
+https://f4b4nd.github.io/GameOn-website-FR/
+
