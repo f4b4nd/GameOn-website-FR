@@ -12,41 +12,37 @@ const generalConditionsInput = document.querySelector('#generalConditions') ;
 
 // inputs with error selector association
 const inputsToCheck = [
-    { input: firstNameInput, id: 'first', errorID: 'firstname-error', setBorder: true },
-    { input: lastNameInput, id: 'last', errorID: 'lastname-error', setBorder: true },
-    { input: emailInput, id: 'email', errorID: 'email-error', setBorder: true },
-    { input: birthdateInput, id: 'birthdate', errorID: 'birthdate-error', setBorder: true },
-    { input: numberOfTournamentsInput, id: 'quantity', errorID: 'quantity-error', setBorder: true },
-    { input: locationInputs, id: 'location', errorID: 'location-error', setBorder: false},
-    { input: generalConditionsInput, id: 'generalConditions', errorID: 'generalConditions-error', setBorder: false },
+    { input: firstNameInput, id: '#first', errorID: '#firstname-error', setBorder: true },
+    { input: lastNameInput, id: '#last', errorID: '#lastname-error', setBorder: true },
+    { input: emailInput, id: '#email', errorID: '#email-error', setBorder: true },
+    { input: birthdateInput, id: '#birthdate', errorID: '#birthdate-error', setBorder: true },
+    { input: numberOfTournamentsInput, id: '#quantity', errorID: '#quantity-error', setBorder: true },
+    { input: locationInputs, id: '#location', errorID: '#location-error', setBorder: false},
+    { input: generalConditionsInput, id: '#generalConditions', errorID: '#generalConditions-error', setBorder: false },
 ]
 
 // check input with regex: nom, prenom, mail, nombre de tournois
 const inputsWithRegex = [
     { 
-        name: 'firstname', 
         input: firstNameInput, 
         regex: /^[A-Za-z]{2,}$/gm 
     },
     { 
-        name: 'lastname', 
         input: lastNameInput, 
         regex: /^[A-Za-z]{2,}$/gm 
     },
     {
-        name: 'email', 
         input: emailInput, 
         regex: /^[\w-\.]+@[A-Za-z]+\.[A-Za-z]+$/gm 
     },
     { 
-        name: 'number-of-tournaments', 
         input: numberOfTournamentsInput, 
         regex:  /^\d+$/gm 
     },
 ]
 
 // check form when input is checked with regex
-function inputsWithRegexAreValid(input, regex) {
+function inputsWithRegexIsValid(input, regex) {
     return input.value.match(regex) ? true : false ;
 }
 
@@ -95,33 +91,32 @@ submitModalBtn.addEventListener('click', function(e) {
     
     // add errors with regex inputs
     inputsWithRegex.map(item => {
-        if (!inputsWithRegexAreValid(item.input, item.regex))  errors.push(item.input.id) ;
+        if (!inputsWithRegexIsValid(item.input, item.regex))  errors.push('#' + item.input.id) ;
     });
 
     // add error for location
-    if (!locationInputIsValid())  errors.push('location') ;
+    if (!locationInputIsValid())  errors.push('#location') ;
 
     // add error for generalConditions
-    if (!generalConditionsInputIsValid())  errors.push('generalConditions') ;
+    if (!generalConditionsInputIsValid())  errors.push('#generalConditions') ;
 
     // add error for birthdate
-    if (!birthdateInputIsValid())  errors.push('birthdate') ;
+    if (!birthdateInputIsValid())  errors.push('#birthdate') ;
 
     // display errors
     if (errors.length > 0) {
 
-        inputsToCheck.map(input => {
+        inputsToCheck.map(item => {
 
-            const element = document.querySelector('#' + input.id)
-            const errorElement = document.querySelector('#' + input.errorID)
+            const errorElement = document.querySelector(item.errorID) ;
 
-            if (errors.includes(input.id)) {
+            if (errors.includes(item.id)) {
                 errorElement.style.display = 'block' ;
-                if (input.setBorder) element.style.border = '1px solid red' ;
+                if (item.setBorder) item.input.style.border = '1px solid red' ;
             }
             else {
                 errorElement.style.display = 'none' ;
-                if (input.setBorder) element.style.border = 'none' ;
+                if (item.setBorder) item.input.style.border = 'none' ;
             }
 
         });
