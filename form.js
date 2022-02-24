@@ -12,13 +12,13 @@ const generalConditionsInput = document.querySelector('#generalConditions') ;
 
 // inputs with error selector association
 const inputsToCheck = [
-    { input: firstNameInput, id: 'first', errorID: 'firstname-error', border: true },
-    { input: lastNameInput, id: 'last', errorID: 'lastname-error', border: true },
-    { input: emailInput, id: 'email', errorID: 'email-error', border: true },
-    { input: birthdateInput, id: 'birthdate', errorID: 'birthdate-error', border: true },
-    { input: numberOfTournamentsInput, id: 'quantity', errorID: 'quantity-error', border: true },
-    { input: locationInputs, id: 'location', errorID: 'location-error', border: false},
-    { input: generalConditionsInput, id: 'generalConditions', errorID: 'generalConditions-error', border: false },
+    { input: firstNameInput, id: 'first', errorID: 'firstname-error', setBorder: true },
+    { input: lastNameInput, id: 'last', errorID: 'lastname-error', setBorder: true },
+    { input: emailInput, id: 'email', errorID: 'email-error', setBorder: true },
+    { input: birthdateInput, id: 'birthdate', errorID: 'birthdate-error', setBorder: true },
+    { input: numberOfTournamentsInput, id: 'quantity', errorID: 'quantity-error', setBorder: true },
+    { input: locationInputs, id: 'location', errorID: 'location-error', setBorder: false},
+    { input: generalConditionsInput, id: 'generalConditions', errorID: 'generalConditions-error', setBorder: false },
 ]
 
 // check input with regex: nom, prenom, mail, nombre de tournois
@@ -67,6 +67,24 @@ function birthdateInputIsValid() {
     return birthdateInput.value !== '' ;
 }
 
+// reset form
+function resetForm () {
+    const form = document.querySelector('#form-modal form') ;
+    form.reset() ;
+    resetFormStyleErrors() ;
+}
+
+// reset form style
+const resetFormStyleErrors = () => {
+    // reset borders
+    inputsToCheck.map(item => {
+        if (item.setBorder && item.input.style.border)   item.input.style.border = 'none' ;
+    });
+
+    // hide errors
+    const errors = document.querySelectorAll('.error') ;
+    Array.from(errors).map(e => e.style.display ='none') ;
+}
 
 // check all datas from form
 submitModalBtn.addEventListener('click', function(e) {
@@ -99,11 +117,11 @@ submitModalBtn.addEventListener('click', function(e) {
 
             if (errors.includes(input.id)) {
                 errorElement.style.display = 'block' ;
-                if (input.border) element.style.border = '1px solid red' ;
+                if (input.setBorder) element.style.border = '1px solid red' ;
             }
             else {
                 errorElement.style.display = 'none' ;
-                if (input.border) element.style.border = 'none' ;
+                if (input.setBorder) element.style.border = 'none' ;
             }
 
         });
