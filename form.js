@@ -25,11 +25,11 @@ const inputsToCheck = [
 const inputsWithRegex = [
     { 
         input: firstNameInput, 
-        regex: /^[A-Za-z]{2,}$/gm 
+        regex: /^[A-Za-z](\-|[A-Za-z])+$/gm 
     },
     { 
         input: lastNameInput, 
-        regex: /^[A-Za-z]{2,}$/gm 
+        regex: /^[A-Za-z](\-|[A-Za-z])+$/gm 
     },
     {
         input: emailInput, 
